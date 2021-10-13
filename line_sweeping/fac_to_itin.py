@@ -1,12 +1,12 @@
 import math
 
-def facToItin(n, iter):
-  facPerm = 1
+def fac_to_itin(n, iter):
+  fac_perm = 1
   for i in range(1, n + 1):
-    facPerm *= i
+    fac_perm *= i
     itin = []
     integers = range(n)
-    fac = facPerm
+    fac = fac_perm
     for place in reversed(range(n)):
       i = n - 1 - place
       fac /= (place + 1)

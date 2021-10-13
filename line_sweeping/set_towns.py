@@ -1,6 +1,6 @@
 import random
 
-def setTowns(n):
+def set_towns(n):
     # randomly create the coordinates of a point
     xs = []
     ys = []
