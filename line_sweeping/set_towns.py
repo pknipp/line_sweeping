@@ -7,6 +7,7 @@ def set_towns(n):
     while len(xs) < n:
         x = random.random()
         y = random.random()
+        # ix & iy need to be defined in outer scope (ie, not in "except" block)
         ix = -1
         iy = -1
         try:

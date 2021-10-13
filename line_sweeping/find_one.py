@@ -1,4 +1,4 @@
-from . import fac_to_itin
+from fac_to_itin  import fac_to_itin
 
 def find_one(n, iter, distance_min, memo, xys, inter_town_distances):
   fac_perm = 1

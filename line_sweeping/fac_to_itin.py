@@ -5,7 +5,7 @@ def fac_to_itin(n, iter):
   for i in range(1, n + 1):
     fac_perm *= i
     itin = []
-    integers = range(n)
+    integers = list(range(n))
     fac = fac_perm
     for place in reversed(range(n)):
       i = n - 1 - place
