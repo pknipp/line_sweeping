@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
-from back.config import Config
+from line_sweeping.config import Config
 from datetime import datetime
 
 
@@ -36,4 +36,4 @@ def react_root(path):
 
 @app.route('/')
 def hello():
-    return {"message": "Hello from back-end which is not attached to a front"}
+    return {"message": "Hello from line-sweeping back-end"}
