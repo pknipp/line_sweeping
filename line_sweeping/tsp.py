@@ -1,27 +1,21 @@
-let setTowns = require('./setTowns');
-let lookup = require('./lookup');
-let findOne = require('./findOne');
+from . import set_towns
+from . import lookup
+from . import find_one
 
-const tsp = n => {
-  let distanceMin = Infinity;
-  // let the origin be the n-th town (using 0-based indexing)
-  const xys = [...setTowns(n), [0, 0]];
-  const interTownDistances = lookup(xys);
-  let iter = -1;
-  let finished = false;
-  let memo = [];
-  let itin;
-  while (!finished) {
-    let results = findOne(n, iter + 1, distanceMin, memo, xys, interTownDistances);
-    if (results.finished) break;
-    iter = results.iter;
-    itin = results.itin,
-    distanceMin = results.distanceMin;
-    console.log(iter, itin.join("-"), distanceMin);
-  }
-  console.log("finished");
-}
-
-console.log(tsp(9));
-
-module.exports = tsp;
+def tsp(n):
+  distance_min = float("inf")
+  # let the origin be the n-th town (using 0-based indexing)
+  xys = set_towns(n) + [0, 0]
+  inter_town_distances = lookup(xys)
+  iter = -1
+  finished = False
+  memo = []
+  while not finished:
+    results = find_one(n, iter + 1, distance_min, memo, xys, inter_town_distances)
+    if results.finished:
+      break
+    iter = results.iter
+    itin = results.itin
+    distance_min = results.distance_min
+    print(iter, "-".join(itin), distance_min)
+  print("finished")

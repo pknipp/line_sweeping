@@ -4,7 +4,7 @@ def set_towns(n):
     # randomly create the coordinates of a point
     xs = []
     ys = []
-    while len(xs.length) < n:
+    while len(xs) < n:
         x = random.random()
         y = random.random()
         ix = -1
