@@ -15,10 +15,14 @@ def find_one(n, iter, distance_min, memo, xys, inter_town_distances):
     are_same = True
     for i in range(len(itin)):
       index = itin[i]
-      are_same = are_same and memo and memo[i] and memo[i][0] == index
+      are_same = are_same and memo and len(memo) > i and memo[i][0] == index
       #  ... if existing element in memo cannot be used, then reassign it
       if not are_same:
-        memo[i] = [index, distance_tot + inter_town_distances[index_last][index]]
+        pair = [index, distance_tot + inter_town_distances[index_last][index]]
+        if len(memo) > i:
+          memo[i] = pair
+        else:
+          memo.append(pair)
       distance_tot = memo[i][1]
       index_last = index
     # salesperson ends at the origin, which is n-th point.

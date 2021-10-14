@@ -12,11 +12,11 @@ def tsp(n):
   memo = []
   while not finished:
     results = find_one(n, iter + 1, distance_min, memo, xys, inter_town_distances)
-    if results.finished:
+    if results["finished"]:
       break
-    iter = results.iter
-    itin = results.itin
-    distance_min = results.distance_min
-    print(iter, "-".join(itin), distance_min)
+    iter = results["iter"]
+    itin = results["itin"]
+    distance_min = results["distance_min"]
+    print(iter, "-".join([str(n) for n in itin]), distance_min)
   print("finished")
 tsp(11)
