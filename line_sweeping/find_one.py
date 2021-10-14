@@ -1,6 +1,6 @@
 from fac_to_itin  import fac_to_itin
 
-def find_one(n, iter, distance_min, memo, xys, inter_town_distances):
+def find_one(iter, base2, distance_min, origin): #, memo, xys, inter_town_distances):
 
   """ Below are descriptions of the lines.  All positions are expressed in half-feet, relative to an origin at the middle of the baseline.  All lines point in positive direction (either x or y).
     0: left-outside alley
@@ -25,11 +25,43 @@ def find_one(n, iter, distance_min, memo, xys, inter_town_distances):
         (( dx1,  0),( dx1,dy2)), \
         (( dx2,  0),( dx2,dy2)))
 
+  n = len(xy)
+  base2_max = 2 ** n
   fac_perm = 1
   for i in range(1, n + 1):
     fac_perm *= i
+  base2 = base2 + 1
+  if base2 == base2_max:
+    base2 = 0
+    iter += 1
   # loop over all permutations (ie, all possible itineraries)
   while iter < fac_perm:
+    while base2 < base2_max:
+
+for ntot in range(0,2**(len(xy)-1)):
+  i = [0]
+  n = ntot
+  length = 0
+  d = []
+  for iline in range(1,len(xy)):
+   i.append(int(n % 2))
+   n -= i[iline]
+   n /= 2
+   xi = lines[iline-1][1-i[iline-1]][0]
+   yi = lines[iline-1][1-i[iline-1]][1]
+   xf = lines[iline][i[iline]][0]
+   yf = lines[iline][i[iline]][1]
+   d.append(math.sqrt((xi - xf)**2 + (yi - yf)**2))
+   length += d[iline-1]
+  if length<lenmin:
+   lenmin=length
+   for iline in range(len(xy)):
+    imin[iline] = i[iline]
+    nmin[iline] = lines[iline]
+   print(length,d)
+
+
+
     # salesperson starts at origin, which n-th point (0-based indexing) is defined to be.
     index_last = n
     distance_tot = 0
