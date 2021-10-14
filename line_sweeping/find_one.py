@@ -1,6 +1,30 @@
 from fac_to_itin  import fac_to_itin
 
 def find_one(n, iter, distance_min, memo, xys, inter_town_distances):
+
+  """ Below are descriptions of the lines.  All positions are expressed in half-feet, relative to an origin at the middle of the baseline.  All lines point in positive direction (either x or y).
+    0: left-outside alley
+    1: left-inside alley
+    2: back of service line
+    3: bisector of service boxes
+    4: baseline
+    5: right-inside alley
+    6: right-outside alley
+  """
+
+  dx1 = 27
+  dx2 = 36
+  dy1 = 36
+  dy2 = 78
+
+  xy = (((-dx2,  0),(-dx2,dy2)), \
+        ((-dx1,  0),(-dx1,dy2)), \
+        ((-dx1,dy1),( dx1,dy1)), \
+        ((   0,dy1),(   0,dy2)), \
+        ((-dx2,  0),( dx2,  0)), \
+        (( dx1,  0),( dx1,dy2)), \
+        (( dx2,  0),( dx2,dy2)))
+
   fac_perm = 1
   for i in range(1, n + 1):
     fac_perm *= i
