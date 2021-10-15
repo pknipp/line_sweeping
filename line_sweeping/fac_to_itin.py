@@ -4,8 +4,8 @@ def fac_to_itin(n, iter):
   fac_perm = 1
   for i in range(1, n + 1):
     fac_perm *= i
-    if iter == 0:
-      print(i, fac_perm)
+    # if iter == 0:
+      # print(i, fac_perm)
   itin = []
   integers = list(range(n))
   fac = fac_perm

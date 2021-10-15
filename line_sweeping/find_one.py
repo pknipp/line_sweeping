@@ -1,6 +1,7 @@
-from fac_to_itin  import fac_to_itin
+from . import fac_to_itin
 
 def find_one(n, iter, distance_min, memo, xys, inter_town_distances):
+  print(n, iter, distance_min, len(memo), len(xys), len(inter_town_distances), len(inter_town_distances[0]))
 
   """ Below are descriptions of the lines.  All positions are expressed in half-feet, relative to an origin at the middle of the baseline.  All lines point in positive direction (either x or y).
     0: left-outside alley
@@ -34,7 +35,7 @@ def find_one(n, iter, distance_min, memo, xys, inter_town_distances):
     index_last = n
     distance_tot = 0
     # let dIter = Math.round(facPerm/1000)
-    itin = fac_to_itin(n, iter)
+    itin = fac_to_itin.fac_to_itin(n, iter)
     # flag used to determine whether or not memo can be used
     are_same = True
     for i in range(len(itin)):
@@ -55,7 +56,7 @@ def find_one(n, iter, distance_min, memo, xys, inter_town_distances):
     itin.append(n)
     if distance_tot < distance_min:
       distance_min = distance_tot
-      return {"iter": iter, "itin": itin, "distance_min": distance_min, "finished": False}
+      return {"iter": iter, "itin": itin, "distance_min": distance_min, "memo": memo, "finished": False}
     iter += 1
     # // Break in order to display the next 0.1% of progress.
     # // Before both loops, dIter was defined to be Math.round(facPerm/1000)

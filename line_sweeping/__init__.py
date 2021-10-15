@@ -1,9 +1,11 @@
 import os
+import json
 from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from line_sweeping.config import Config
 from datetime import datetime
+from . import find_one
 
 
 app = Flask(__name__)
@@ -37,3 +39,17 @@ def react_root(path):
 @app.route('/')
 def hello():
     return {"message": "Hello from line-sweeping back-end"}
+
+@app.route('/<params>')
+def index(params):
+    # print(params)
+    params_dict = json.loads(params)
+    print("params_dict = ", params_dict)
+    n = params_dict["n"]
+    iter = params_dict["iter"]
+    distance_min = params_dict["distanceMin"]
+    memo = params_dict["memo"]
+    xys = params_dict["xys"]
+    inter_town_distances = params_dict["interTownDistances"]
+    response = find_one.find_one(n, iter, distance_min, memo, xys, inter_town_distances)
+    return response
