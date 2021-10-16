@@ -4,8 +4,6 @@ def fac_to_itin(n, iter):
   fac_perm = 1
   for i in range(1, n + 1):
     fac_perm *= i
-    # if iter == 0:
-      # print(i, fac_perm)
   itin = []
   integers = list(range(n))
   fac = fac_perm
@@ -18,6 +16,3 @@ def fac_to_itin(n, iter):
     itin.append(index)
     iter -= digit * fac
   return itin
-
-# for i in range(0, 24):
-#   print facToItin(4, i)

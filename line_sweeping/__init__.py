@@ -42,9 +42,7 @@ def hello():
 
 @app.route('/<params>')
 def index(params):
-    # print(params)
     params_dict = json.loads(params)
-    print("params_dict = ", params_dict)
     n = params_dict["n"]
     iter = params_dict["iter"]
     distance_min = params_dict["distanceMin"]
