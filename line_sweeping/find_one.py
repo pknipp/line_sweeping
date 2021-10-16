@@ -1,6 +1,7 @@
 from . import fac_to_itin
 
 def find_one(n, fac_perm, iter, distance_min, memo, xys, inter_town_distances):
+  d_iter = round(fac_perm * 0.05)
 
   """ Below are descriptions of the lines.  All positions are expressed in half-feet, relative to an origin at the middle of the baseline.  All lines point in positive direction (either x or y).
     0: left-outside alley
@@ -50,18 +51,11 @@ def find_one(n, fac_perm, iter, distance_min, memo, xys, inter_town_distances):
     distance_tot += inter_town_distances[index_last][n]
     itin.insert(0, n)
     itin.append(n)
+    # Return if you find the next minimum of the search.
     if distance_tot < distance_min:
       return {"iter": iter, "itin": itin, "distance_min": distance_tot, "memo": memo, "finished": False}
+    # Return to provide an update on progress (the next 5%).
+    if not iter % d_iter:
+      return {"iter": iter, "finished": False}
     iter += 1
-    # // Break in order to display the next 0.1% of progress.
-    # // Before both loops, dIter was defined to be Math.round(facPerm/1000)
-    # // if (!(iterPerm % dIter)) {
-    #   // setNextIterPermI(iterPerm + 1);
-    #   // break;
-    # // }
-    # // The loop is done.
-    # // if (iterPerm === facPerm - 1) {
-    #   // setDone(true);
-    #   // setNextIterPermI(iterPerm);
-    # // }
   return {"finished": True}
