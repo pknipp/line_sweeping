@@ -44,10 +44,11 @@ def hello():
 def index(params):
     params_dict = json.loads(params)
     n = params_dict["n"]
+    fac = params_dict["fac"]
     iter = params_dict["iter"]
     distance_min = params_dict["distanceMin"]
     memo = params_dict["memo"]
     xys = params_dict["xys"]
     inter_town_distances = params_dict["interTownDistances"]
-    response = find_one.find_one(n, iter, distance_min, memo, xys, inter_town_distances)
+    response = find_one.find_one(n, fac, iter, distance_min, memo, xys, inter_town_distances)
     return response
