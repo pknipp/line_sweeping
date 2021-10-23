@@ -1,29 +1,40 @@
-from . import fac_to_itin
-from . import base2_to_ends
+# from . import fac_to_itin
+# from . import base2_to_ends
+from . import helper
 
 def find_one(n, fac_perm, base2_max, iter, base2, distance_min, memo, lines, origin, distances):
     # print("distances = ", distances)
   # loop over all permutations & powers of 2 (ie, all possible itineraries)
     base2 = 0
-    itin = fac_to_itin.fac_to_itin(n, fac_perm, iter)
+    itin = helper.fac_to_itin(n, fac_perm, iter)
     # print("iter/itin = ", iter, itin)
     while base2 < base2_max:
       # print("top of base2/while")
-      ends = base2_to_ends.base2_to_ends(n, base2)
+      ends = helper.base2_to_ends(n, base2)
       # print("base2/ends = ", base2, ends)
       distance_tot = 0
       # distance from origin to start of zero-th line
-      distance_tot += distances[itin[ 0 ]][n][ends[0]][0]
+      start = lines[itin[0]][ends[0]]
+      this_distance = distances[itin[0]][n][ends[0]][0]
+      print("0th leg: ", start, origin, this_distance)
+      distance_tot += this_distance
       # print("distance after starting leg = ", distance_tot)
       # distance from end of last line back to origin
-      distance_tot += distances[itin[n-1]][n][1 - ends[n - 1]][0]
+      start = lines[itin[n - 1]][1 - ends[n - 1]]
+      this_distance = distances[itin[n-1]][n][1 - ends[n - 1]][0]
+      print("last leg: ", start, origin, this_distance)
+      distance_tot += this_distance
       # print("distance after inclusion of ending leg = ", distance_tot)
       index_last = itin[0]
       for i in range(1, len(itin)):
         # print("i/distance_tot = ", i, distance_tot)
         index = itin[i]
         # print("index_last/index/ends[index_last]/[1 - ends[index] = ", index_last, index, ends[index_last], 1 - ends[index])
-        distance_tot += distances[index_last][index][ends[index_last]][1 - ends[index]]
+        start = lines[itin[index_last]][ends[index_last]]
+        end   = lines[itin[index     ]][1 - ends[index]]
+        this_distance = distances[index_last][index][ends[index_last]][1 - ends[index]]
+        print(i,"-th leg: ", start, end, this_distance)
+        distance_tot += this_distance
         # print("distance after inclusion of intermediate legs and i = ", i, distance_tot)
       # print("distance_tot/distance_min = ", distance_tot, distance_min)
       if distance_tot < distance_min:
